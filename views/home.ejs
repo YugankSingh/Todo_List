@@ -1,11 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TODO App</title>
 </head>
 <body>
-    <h1>yup ejs successfully connected</h1>
+    <header>
+        <div id = "color-mode-toggle">
+            
+        </div>
+        <h1>TODO App</h1>
+    </header>
+
+    <form method="POST" action="/new-task">
+        <div>
+            DESCRIPTION <br>
+            <input type="text" placeholder="What do you need to do?" id="task" name="task" required>
+        </div>
+
+        <div>
+            CATEGORY <br>
+            <select name="category">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+            </select>
+         </div>
+
+        <div>
+            DUE DATE <br>
+            <input type="date" name="date" placeholder="date">
+        </div>
+        <div>
+            <button type="submit">ADD TASK</button>
+            <button form ="tasks-checklist" type="submit">DELETE TASKS</button>
+        </div>
+    </form>
+
+    <div id="tasks">
+        <form id="tasks-checklist" action="/remove-task" method="POST">
+            <%for(let i of tasks_list){%>
+                <div>
+                    
+                    <input type="checkbox" id="<%= i.description %>" name="task_id" value="<%= i.description %>">
+                    <label for="<%= i.description %>"><%= i.description %></label><br>
+                </div>
+            <%}%>
+        </form>
+    </div>
+
 </body>
 </html>
