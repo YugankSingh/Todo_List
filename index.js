@@ -4,6 +4,7 @@ const path = require('path');
 
 
 const db = require('./config/mongoose');
+const Task = require('./models/task');
 
 const app = express();
 
@@ -23,31 +24,7 @@ app.listen(port, (err) => {
         console.log(`error in listening to the port $(port) : $(err)`);
         return;
     }
-    console.log('Yup My server is listening to the port')
+    console.log('Yup My server is listening to the port : ', port)
 });
 
-var taskList = [
-    {
-        description: "shut the fuck up"
-    },
-    {
-        description: 'shut the fuck down'
-    }
-];
 
-
-//create new task
-app.post('/new-task', (req, res) => {
-    console.log(req.body);
-    taskList.push({
-        description: req.body.task,
-        category: req.body.category,
-        due_date: req.body.date
-     });
-    res.redirect('back');
-});
-
-app.post('/remove-task', (req, res) => {
-    console.log(req.body);
-    res.redirect('back');
-});

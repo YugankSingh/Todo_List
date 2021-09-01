@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 //connect to the db
-mongoose.connect('mongodb://localhost/task_list_db');
+mongoose.connect('mongodb://localhost/task_list_db', {useNewUrlParser: true,useUnifiedTopology: true});
 
 //acquire the connection 
 const db = mongoose.connection;

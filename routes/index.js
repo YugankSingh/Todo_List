@@ -8,6 +8,5 @@ console.log('router loaded');
 
 router.get('/', homeController.home);
 router.use('/task', require('./task'));
-router.use('/task-category', require('./task_category'));
 
 module.exports = router;

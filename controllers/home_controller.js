@@ -1,15 +1,18 @@
+const db = require('../config/mongoose');
+const Contact = require('../models/task');
 
-var taskList = [
-    {
-        description: "shut the fuck up"
-    },
-    {
-        description: 'shut the fuck down'
-    }
-];
 
 module.exports.home = (req,res) => {
-    return res.render('home', {
-        tasks_list: taskList
-    });
+    Contact.find({}, function(err, taskList){
+        if(err){
+            console.log("error in fetching task");
+            return;
+        }
+        return res.render('home', {
+            tasks_list: taskList
+        })
+    })
 };
+
+
+// get button from DOM

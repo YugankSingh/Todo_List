@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TODO App</title>
-</head>
+    <link rel="stylesheet" href="home.css">
+   </head>
 <body>
     <header>
         <div id = "color-mode-toggle">
@@ -14,41 +15,61 @@
         <h1>TODO App</h1>
     </header>
 
-    <form method="POST" action="/new-task">
-        <div>
-            DESCRIPTION <br>
-            <input type="text" placeholder="What do you need to do?" id="task" name="task" required>
+    <form method="POST" action="/task/create" id="create-task">
+        <div id="description">
+            <div class="form-text">DESCRIPTION</div>
+            <input type="text" placeholder="What do you need to do?" id="description" name="description" required>
         </div>
 
         <div>
-            CATEGORY <br>
+            <div class="form-text">CATEGORY</div>
             <select name="category">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
+                <option value="personal">personal</option>
+                <option value="school">school</option>
+                <option value="home">home</option>
+                <option value="work">work</option>
+                <option value="others">others</option>
+                <option value="" selected>none</option>
             </select>
          </div>
 
         <div>
-            DUE DATE <br>
+            <div class="form-text">DUE DATE</div>
             <input type="date" name="date" placeholder="date">
-        </div>
-        <div>
-            <button type="submit">ADD TASK</button>
-            <button form ="tasks-checklist" type="submit">DELETE TASKS</button>
         </div>
     </form>
 
+    <div id="buttons">
+        <button form ="create-task" type="submit">
+            <i class="fas fa-plus"></i>
+            ADD TASK</button>
+        <button form ="tasks-checklist" type="submit">
+            <i class="fas fa-trash-alt"></i>
+            DELETE TASKS</button>
+    </div>
+
     <div id="tasks">
-        <form id="tasks-checklist" action="/remove-task" method="POST">
+        <form id="tasks-checklist" action="/task/delete" method="POST">
             <%for(let i of tasks_list){%>
-                <div>
-                    
-                    <input type="checkbox" id="<%= i.description %>" name="task_id" value="<%= i.description %>">
-                    <label for="<%= i.description %>"><%= i.description %></label><br>
+                <div> 
+                    <div class="tasks-details">
+                        <input type="checkbox" name="id" id="<%= i._id %>" value="<%= i._id %>">
+                        <div>  
+                            <label for="<%= i._id %>">
+                                <%= i.description %>
+                                <p class="task-due-date"><i class="far fa-calendar-alt"></i> <%= i.due_date %></p>
+                            </label><br>
+                        </div>
+                    </div>
+                     <div style="background: <%= i.categoryColor%>" class="category-div">
+                         <%= i.categoryName %>
+                     </div>
+
                 </div>
+
             <%}%>
         </form>
     </div>
-
+    <script src="https://kit.fontawesome.com/c5cd6a65ef.js" crossorigin="anonymous"></script>
 </body>
 </html>
